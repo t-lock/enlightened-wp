@@ -1,23 +1,24 @@
 /**
  * File navigation.js.
  *
- * Handles toggling the navigation menu for small screens and enables TAB key
- * navigation support for dropdown menus.
+ * Handles toggling the navigation menu for small screens and enables TAB key navigation support for dropdown menus.
  */
 (function() {
-  var container, button, menu, links, i, len;
+  console.log('reload again');
+  let container, button, menu, links, i, len;
 
   container = document.getElementById('site-navigation');
+
   if (!container) {
     return;
   }
 
-  button = container.getElementsByTagName('button')[0];
+  button = container.querySelector('button'); // querySelector will automatically return the first match.
   if ('undefined' === typeof button) {
     return;
   }
 
-  menu = container.getElementsByTagName('ul')[0];
+  menu = container.querySelector('ul');
 
   // Hide menu toggle button if menu is empty and return early.
   if ('undefined' === typeof menu) {
@@ -26,45 +27,45 @@
   }
 
   menu.setAttribute('aria-expanded', 'false');
-  if (-1 === menu.className.indexOf('nav-menu')) {
-    menu.className += ' nav-menu';
+  if (!menu.classList.contains('nav-menu')) {
+    menu.classList.add('nav-menu');
   }
 
-  button.onclick = function() {
-    if (-1 !== container.className.indexOf('toggled')) {
-      container.className = container.className.replace(' toggled', '');
+  button.onclick = () => {
+    if (container.classList.contains('toggled')) {
+      container.classList.remove('toggled');
       button.setAttribute('aria-expanded', 'false');
       menu.setAttribute('aria-expanded', 'false');
     } else {
-      container.className += ' toggled';
+      container.classList.add('toggled');
       button.setAttribute('aria-expanded', 'true');
       menu.setAttribute('aria-expanded', 'true');
     }
   };
 
   // Get all the link elements within the menu.
-  links = menu.getElementsByTagName('a');
+  links = menu.querySelectorAll('a');
 
   // Each time a menu link is focused or blurred, toggle focus.
-  for (i = 0, len = links.length; i < len; i++) {
-    links[i].addEventListener('focus', toggleFocus, true);
-    links[i].addEventListener('blur', toggleFocus, true);
+  for (const link of links) {
+    link.addEventListener('focus', toggleFocus, true);
+    link.addEventListener('blur', toggleFocus, true);
   }
 
   /**
    * Sets or removes .focus class on an element.
    */
   function toggleFocus() {
-    var self = this;
+    const self = this;
 
     // Move up through the ancestors of the current link until we hit .nav-menu.
-    while (-1 === self.className.indexOf('nav-menu')) {
+    while (!self.classList.contains('nav-menu')) {
       // On li elements toggle the class .focus.
-      if ('li' === self.tagName.toLowerCase()) {
-        if (-1 !== self.className.indexOf('focus')) {
-          self.className = self.className.replace(' focus', '');
+      if ('LI' === self.tagName) {
+        if (self.classList.contains('focus')) {
+          self.classList.remove('focus');
         } else {
-          self.className += ' focus';
+          self.classList.add('focus');
         }
       }
 
@@ -76,14 +77,13 @@
    * Toggles `focus` class to allow submenu access on tablets.
    */
   (function(container) {
-    var touchStartFn,
-      i,
-      parentLink = container.querySelectorAll('.menu-item-has-children > a, .page_item_has_children > a');
+    const parentLink = container.querySelectorAll('.menu-item-has-children > a, .page_item_has_children > a');
+    let touchStartFn, i;
 
     if ('ontouchstart' in window) {
-      touchStartFn = function(e) {
-        var menuItem = this.parentNode,
-          i;
+      touchStartFn = e => {
+        const menuItem = this.parentNode;
+        let i;
 
         if (!menuItem.classList.contains('focus')) {
           e.preventDefault();
@@ -99,8 +99,8 @@
         }
       };
 
-      for (i = 0; i < parentLink.length; ++i) {
-        parentLink[i].addEventListener('touchstart', touchStartFn, false);
+      for (const child of parentLink) {
+        child.addEventListener('touchstart', touchStartFn, false);
       }
     }
   })(container);
