@@ -14,6 +14,24 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer">
+
+		<!-- carbon field demo -->
+		<?php
+			$bgs = array(
+					'mountain' => 'https://source.unsplash.com/X1UTzW8e7Q4/800x600',
+					'temple' => 'https://source.unsplash.com/ioJVccFmWxE/800x600',
+					'road' => 'https://source.unsplash.com/5c8fczgvar0/800x600',
+			);
+			$text = carbon_get_theme_option('crb_text');
+			$image = carbon_get_theme_option('crb_background_image');
+
+		?>
+
+		<div>
+			<p><?= $text ?></p>
+			<img src="<?= $bgs[$image] ?>" alt="<?= $image ?>" width="300" />
+		</div>
+
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', '_s' ) ); ?>">
 				<?php
