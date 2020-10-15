@@ -40,7 +40,7 @@
 			$_s_description = get_bloginfo( 'description', 'display' );
 			if ( $_s_description || is_customize_preview() ) :
 				?>
-				<p class="site-description">Not <?php echo $_s_description; /* WPCS: xss ok. */ ?></p>
+				<p class="site-description"><em>Not</em> <?php echo $_s_description; /* WPCS: xss ok. */ ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
