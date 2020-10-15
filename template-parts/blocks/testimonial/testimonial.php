@@ -27,12 +27,13 @@ if( !empty($block['align']) ) {
 // Load values and assign defaults.
 $text = get_field('quote') ?: 'Your testimonial here...';
 $author = get_field('name') ?: 'Author name';
+$role = get_field('role') ?: '';
 
 ?>
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
     <blockquote class="testimonial-blockquote">
         <span class="testimonial-text"><?php echo $text; ?></span>
         <br>
-        <strong class="testimonial-author"><?php echo $author; ?></strong>
+        <strong class="testimonial-author"><?php echo $author; ?></strong>, <small><?= $role ?></small>
     </blockquote>
 </div>
