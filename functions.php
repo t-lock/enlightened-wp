@@ -9,3 +9,4 @@
 
 require_once('functions/_s-functions.php');
 require_once('functions/theme-options.php');
+require_once('functions/acf-blocks.php');
