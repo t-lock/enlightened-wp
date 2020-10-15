@@ -1,8 +1,18 @@
 # Englightened Wordpress
 
-Requirements: A running wordpress environment,`Composer`, `Node`, and `NPM`
+Requirements:
 
-Get started with `composer install && npm install`
+- A WP development environment running locally (Recommend: Local By Flywheel)
+- `composer`
+- `node` & `npm`
+
+Setup:
+
+1. Clone this repo in your themes folder
+2. Load dependencies with `composer install && npm install`
+3. Create your .env file `cp .env.example .env`
+4. Edit `DEV_SERVER_URL` in your .env to match the url of your local WP server.
+5. Spin up development by starting your WP development server, then `npm run dev`. This will open a live-reloading tab in your browser at localhost:3000, which responds to changes in php, css, and js files.
 
 #### The rest of this readme is from \_s
 

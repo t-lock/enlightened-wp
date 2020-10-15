@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path'),
   MiniCssExtractPlugin = require('mini-css-extract-plugin'),
   UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
@@ -41,7 +43,7 @@ module.exports = {
     new BrowserSyncPlugin({
       files: '**/*.php',
       injectChanges: true,
-      proxy: 'http://localhost:10018'
+      proxy: process.env.DEV_SERVER_URL
     })
   ],
   optimization: {
